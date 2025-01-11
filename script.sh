@@ -21,6 +21,14 @@ function create_instance() {
     terraform apply --auto-approve
 }
 
+function update_ip() {
+    IP=$(terraform output -raw ec2Block)
+    sed -i "s/ansible_host=[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}.[0-9]\{1,3\}/ansible_host=$IP/" ../ansible/hosts
+   
+}
+
+
+
 function ansible(){
     cd ../ansible
     ansible-playbook main.yaml
@@ -40,11 +48,14 @@ install_ansible_terraform
 create_instance
  #sleep 20
 
+#update ip
+update_ip
+sleep 20
 #terraform_destroy
 
 #call ansible function
 ansible
 
-sleep 20
+#sleep 20
 
-terraform_destroy
+#terraform_destroy

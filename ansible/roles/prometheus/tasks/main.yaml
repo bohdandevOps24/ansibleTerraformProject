@@ -58,8 +58,13 @@
     dest: /etc/systemd/system/prometheus.service
 
 
+
 - name: Make sure a service unit is running
   ansible.builtin.systemd:
     state: started
     name: prometheus
     enabled: yes
+  retries: 3
+  delay: 10
+  register: result
+  until: result is succeeded
