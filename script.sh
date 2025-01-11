@@ -7,7 +7,7 @@ function install_ansible_terraform() {
     
     #add condition to make sure we can overwrite a file because we have an error
     # File '/usr/share/keyrings/hashicorp-archive-keyring.gpg' exists. All this for terraform
-    if [ ! -f /usr/share/keyrings/hashicorp-archive-keyring.gpg]
+    if [ ! -f /usr/share/keyrings/hashicorp-archive-keyring.gpg ]
     then
         wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
     fi
